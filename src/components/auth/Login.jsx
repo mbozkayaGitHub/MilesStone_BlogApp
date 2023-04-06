@@ -8,8 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 import React from 'react';
 import { Formik, Form } from 'formik';
 import TextField  from "@mui/material/TextField";
-import { object, string, number, date, InferType } from 'yup';
-
+import { object, string } from 'yup';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 
 const Login = () => {
@@ -19,8 +19,14 @@ const Login = () => {
 
 
   const loginScheme = object({
-  email: string().email().required("Bu alan zorunludur"),
-  password: string().required("Bu alan zorunludur")
+  email:string().email().required("Bu alan zorunludur"),
+  password:string().required("password zorunludur")
+  .min(8, "password en az 8 karakter olmalıdır")
+  .max(20, "password en fazla 20 karakter olmalıdır")
+  .matches(/\d+/, "Password bir sayı içermelidir")
+  .matches(/[a-z]/, "Password bir küçük harf içermelidir")
+  .matches(/[A-Z]/, "Password bir büyük harf içermelidir")
+  .matches(/[!,?{}><%&$#£+-.]+/, "Password bir özel karakter içermelidir"),
 });
   return (
     <Container maxWidth="lg">
@@ -50,6 +56,7 @@ const Login = () => {
             align="center"
             mb={4}
             color="secondary.light"
+           
           >
             Login
           </Typography>
@@ -75,9 +82,8 @@ const Login = () => {
        value={values?.email || ""}
        onChange={handleChange}
        onBlur={handleBlur}
-       error={touched.email && Boolean(errors.email)}
        helperText={touched.email && Boolean(errors.email)}
-     
+       error={touched.email && Boolean(errors.email)}
       />
       <TextField 
       label="password"
@@ -85,13 +91,13 @@ const Login = () => {
        name="password"
        type="password"
        variant="outlined"
-       value={values?.email || ""}
+       value={values?.password || ""}
        onChange={handleChange}
        onBlur={handleBlur}
+       helperText={touched.password && (errors.password)}
        error={touched.password && Boolean(errors.password)}
-       helperText={touched.password && Boolean(errors.password)}
-     
       />
+      <LoadingButton type="submit" variant="contained">Submit</LoadingButton>
     </Box>
   </Form>
 

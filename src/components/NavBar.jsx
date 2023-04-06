@@ -40,7 +40,7 @@ export const NavBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img   sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />  
+          <img   src={image} width="40" style={{ display: { xs: "none", md: "flex", }, mr: 3 }} />  
           <Typography
             variant="h6"
             noWrap
@@ -95,7 +95,7 @@ export const NavBar = () => {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <img width="40%" sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -112,7 +112,7 @@ export const NavBar = () => {
               textDecoration: "none",
             }}
           >
-            LOGO
+            {/* Dashboard */}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
